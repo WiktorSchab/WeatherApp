@@ -1,0 +1,25 @@
+:root {
+    /* Obj colors */
+    --color1: #424242;
+    --color2: #585454;
+    --color3: #707070;
+    --color4: #A6A6A6;
+    --color5: #D9D9D9;
+    --color6: #DDDDDD;
+    --color7: #F6FDFF;
+
+    /* Font colors */
+    --fcolor1: #FFFFFF;
+
+    /* Font sizes */
+    --size1: 16px;
+    --size2: 20px;
+    --size3: 32px;
+    --size4: 40px;
+    --size5: 48px;
+
+    /* Border radius */
+    --radius1: 8px;
+    --radius2: 16px;
+    --radius3: 32px
+}

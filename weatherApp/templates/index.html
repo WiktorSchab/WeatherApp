@@ -2,4 +2,9 @@
 
 {% block content %}
     <div class="logo"></div>
+    <form method="GET">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Zapisz</button>
+    </form>
 {% endblock %}

@@ -2,9 +2,12 @@
 
 {% block content %}
     <div class="logo"></div>
-    <form method="GET">
+    <form id='locationForm' method="GET">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zapisz</button>
+        {{ form.location }}
+
+        <!-- Submit button that has look of the search loop -->
+        <button type="submit"><i class="bi bi-search"></i><div></div></button>
     </form>
+    <h2 id="formInfo">Check forecast for your city</h2>
 {% endblock %}

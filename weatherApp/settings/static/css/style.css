@@ -32,11 +32,77 @@ section{
 .logo{
     width: 350px;
     height: 220px;
+    margin-top: 5%;
 
     background-image: url('../images/logo.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#locationForm{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+    width: Calc(800px - 40px);
+    height: Calc(65px - 10px);
+    padding: 5px 20px;
+    margin-top: 50px;
+
+    background-color: var(--color6);
+    border-radius: var(--radius3);
+}
+
+#locationForm input{
+    height: 85%;
+    width: 100%;
+
+    background-color: transparent;
+    border-width: 0px;
+    outline: none;
+
+    font-size: var(--size4);
+}
+#locationForm input::placeholder {
+    letter-spacing: 5px;
+}
+
+#locationForm button{
+    display: flex;
+    position: relative;
+    width: 60px;
+    height: 45px;
+
+    background-color: transparent;
+    border-width: 0px;
+}
+/* Search loop icon that acts as submit button */
+#locationForm button i {
+    position: absolute;
+    cursor: pointer;
+    font-size: var(--size4);
+
+    z-index: 4;
+}
+/* Filling of the loop icon */
+#locationForm button div{
+    position: absolute;
+    top: 3px;
+    width: 30px;
+    height: 30px;
+
+    border-radius: 100%;
+    background-color: var(--color7);
+
+    z-index: 3;
+}
+
+#formInfo{
+    font-size: var(--size3);
+    color: var(--fcolor1);
+    letter-spacing: 2px;
 }
 
 footer{

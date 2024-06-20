@@ -1,5 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" href="{% static 'css/forecast.css' %}">
+{% endblock %}
 
 {% block content %}
-  <p>{{ location }}</p>
+
+    <div id="mainContent">
+        <div id="chartArea">
+            <div id="cityInfo">
+                <h1>Szczecin</h1>
+                <h1 id="countryName">Polska</h1>
+            </div>
+
+            <div id="chart">
+                <!-- Day of the week shown in temperature chart -->
+                <div id="weekDayInfo"><p>Mon</p></div>
+                <div id="chartContent">There will be chart soon</div>
+            </div>
+        </div>
+
+        <div id="weekDays">
+            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+        </div>
+    </div>
+
 {% endblock %}

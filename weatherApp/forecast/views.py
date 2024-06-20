@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .forms import LocationForm
+from .utilities import get_daily_temps
 import requests
+
 
 def homePage(request):
     if request.method == 'GET':
@@ -20,7 +22,14 @@ def homePage(request):
             # Getting response from api
             response = requests.get(url).json()
 
-            context = {'location': response}
+            city_info = response['city']
+            weather_info = response['list']
+            weather_daily_info = get_daily_temps(weather_info)
+            print(weather_daily_info)
+            context = {'city_info': city_info,
+                       'weather_info': weather_info,
+                       'weather_daily_info': weather_daily_info,}
+
             return render(request, 'forecast.html', context)
 
     form = LocationForm()

@@ -25,7 +25,7 @@ def homePage(request):
             city_info = response['city']
             weather_info = response['list']
             weather_daily_info = get_daily_temps(weather_info)
-            print(weather_daily_info)
+
             context = {'city_info': city_info,
                        'weather_info': weather_info,
                        'weather_daily_info': weather_daily_info,}

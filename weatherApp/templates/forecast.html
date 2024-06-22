@@ -10,8 +10,8 @@
     <div id="mainContent">
         <div id="chartArea">
             <div id="cityInfo">
-                <h1>Szczecin</h1>
-                <h1 id="countryName">Polska</h1>
+                <h1>{{ city_info.name }}</h1>
+                <h1 id="countryName">{{ city_info.country }}</h1>
             </div>
 
             <div id="chart">
@@ -22,13 +22,9 @@
         </div>
 
         <div id="weekDays">
-            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
-            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
-            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
-            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
-            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
-            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
-            <div class="dayContainer"><p>Mon</p><div><h5>19°C</h5></div></div>
+            {% for date, info in weather_daily_info.items %}
+                <div class="dayContainer"><p>{{ info.2|slice:"0:3" }}</p><div><h5>{{ info.0|floatformat:0 }} &deg;C</h5></div></div>
+            {% endfor %}
         </div>
     </div>
 

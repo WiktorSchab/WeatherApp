@@ -48,10 +48,10 @@ def get_daily_temps(forecast_list):
         temp_c = temp_k - 273.15 # Convert Kelvin to Celsius
 
         description = forecast['weather'][0]['description']
-        daily_temps[date] = (temp_c, description)
-        #print(date)
-        #print(daily_temps[date])
+
+        # Adding today's temp on start of the dict
+        today_temp = {date: (temp_c, description)}
+        daily_temps = {**today_temp, **daily_temps}
 
     daily_temps = add_weekday_to_weather_data(daily_temps)
-    print(daily_temps)
     return daily_temps

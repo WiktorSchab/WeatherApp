@@ -55,3 +55,47 @@ def get_daily_temps(forecast_list):
 
     daily_temps = add_weekday_to_weather_data(daily_temps)
     return daily_temps
+
+
+def get_hour_weather(data):
+    temp_data = {}  # Initialize an empty dictionary to hold the weather data grouped by date
+    for i in data:
+        # Convert temperatures from Kelvin to Celsius
+        temp = i['main']['temp'] - 273.15
+        temp_feels = i['main']['feels_like'] - 273.15
+
+        # Extract weather information
+        weather = i['weather'][0]['main']
+        weather_description = i['weather'][0]['description']
+
+        # Extract date and time from the datetime string
+        dt_txt = i['dt_txt']
+        date = dt_txt.split(' ')[0]
+        time = dt_txt.split(' ')[1]
+
+        # Create a dictionary with the relevant weather data
+        data_to_add = {
+            'temp': temp,
+            'temp_feels': temp_feels,
+            'weather': weather,
+            'weather_description': weather_description,
+            'data': date,
+            'time': time
+        }
+
+        # If the date is not already in the dictionary, add it with an empty list
+        if date not in temp_data:
+            temp_data[date] = []
+
+        # Append the weather data to the list for the corresponding date
+        temp_data[date].append(data_to_add)
+
+    # Optional: Print the data for debugging purposes
+    # for i in temp_data:
+    #     print(i)
+    #     for x in temp_data[i]:
+    #         print(x['time'], x['temp'])
+    #     print('\n------\n')
+
+    return temp_data  # Return the dictionary containing the grouped weather data
+

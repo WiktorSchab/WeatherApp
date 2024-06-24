@@ -5,8 +5,11 @@
     <link rel="stylesheet" href="{% static 'css/forecast.css' %}">
 {% endblock %}
 
-{% block content %}
+{% block additional_scripts %}
+    <script src="{% static 'js/weatherChart.js' %}" defer></script>
+{% endblock %}
 
+{% block content %}
     <div id="mainContent">
         <div id="chartArea">
             <div id="cityInfo">
@@ -17,7 +20,7 @@
             <div id="chart">
                 <!-- Day of the week shown in temperature chart -->
                 <div id="weekDayInfo"><p>Mon</p></div>
-                <div id="chartContent">There will be chart soon</div>
+                <div id="chartContent"><canvas id="myChart"></canvas></div>
             </div>
         </div>
 
@@ -27,5 +30,36 @@
             {% endfor %}
         </div>
     </div>
+    
+    <script type="text/javascript">
+        // Pobranie danych JSON z kontekstu szablonu
+        const testData = JSON.parse('{{ test|escapejs }}');
 
+        // Użycie danych w JavaScript
+        console.log(testData);
+        const labels = testData.map(entry => entry.time);
+        const data = testData.map(entry => entry.temp);
+
+        // Utwórz wykres za pomocą Chart.js
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var temperatureChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperature',
+                    data: data,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 {% endblock %}

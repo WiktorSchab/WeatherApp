@@ -79,7 +79,6 @@ def get_hour_weather(data):
             'temp_feels': temp_feels,
             'weather': weather,
             'weather_description': weather_description,
-            'data': date,
             'time': time
         }
 

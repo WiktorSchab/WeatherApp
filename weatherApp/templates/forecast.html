@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block additional_scripts %}
-    <script src="{% static 'js/weatherChart.js' %}" defer></script>
+    <script src="{% static 'js/weatherChart.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,46 +20,28 @@
             <div id="chart">
                 <!-- Day of the week shown in temperature chart -->
                 <div id="weekDayInfo"><p>Mon</p></div>
-                <div id="chartContent"><canvas id="myChart"></canvas></div>
+                <div id="chartContent">
+
+                    {% for date, info in weather_info.items %}
+                        <div id="chartDiv{{forloop.counter0}}" class="{% if forloop.first %}activeChart{% endif %}">
+                            <canvas id="myChart{{ forloop.counter }}"></canvas>
+                        </div>
+                        <script>
+                            createChart('myChart{{ forloop.counter }}', '{{ info|escapejs }}');
+                        </script>
+                    {% endfor %}
+
+                </div>
             </div>
         </div>
 
+
         <div id="weekDays">
             {% for date, info in weather_daily_info.items %}
-                <div class="dayContainer"><p>{{ info.2|slice:"0:3" }}</p><div><h5>{{ info.0|floatformat:0 }} &deg;C</h5></div></div>
+                <div class="dayContainer"><p>{{ info.2|slice:"0:3" }}</p>
+                    <div onclick="changeChart({{ forloop.counter0 }})"><h5>{{ info.0|floatformat:0 }} &deg;C</h5></div>
+                </div>
             {% endfor %}
         </div>
     </div>
-    
-    <script type="text/javascript">
-        // Pobranie danych JSON z kontekstu szablonu
-        const testData = JSON.parse('{{ test|escapejs }}');
-
-        // Użycie danych w JavaScript
-        console.log(testData);
-        const labels = testData.map(entry => entry.time);
-        const data = testData.map(entry => entry.temp);
-
-        // Utwórz wykres za pomocą Chart.js
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var temperatureChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Temperature',
-                    data: data,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
 {% endblock %}

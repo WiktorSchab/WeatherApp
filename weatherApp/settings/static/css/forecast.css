@@ -55,6 +55,12 @@
     font-size: 30px; /* temp */
 }
 
+#chart #chartContent div{
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
 #chart #weekDayInfo{
     position: absolute;
     display: flex;
@@ -98,6 +104,8 @@
     width: 80px;
 
     background-color: var(--color5);
+
+    cursor: pointer;
 }
 
 #weekDays .dayContainer div h5,
@@ -112,4 +120,10 @@
     margin-top: Calc(100% - 16px - 10%);
 
     text-align: center;
+}
+
+/* Class for charts to display them */
+.activeChart{
+    display: flex !important;
+    justify-content: center;
 }

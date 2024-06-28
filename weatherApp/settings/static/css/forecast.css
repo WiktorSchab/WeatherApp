@@ -68,7 +68,8 @@
 #chart #chartContent div{
     display: none;
     width: 100%;
-    height: 100%;
+    height: Calc(100% - 35px);
+    padding-top: 35px;
 }
 
 #chart #weekDayInfo{

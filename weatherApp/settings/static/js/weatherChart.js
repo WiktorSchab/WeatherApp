@@ -16,18 +16,34 @@ function createChart(canvasObj, dataG){
             datasets: [{
                 label: 'Temperature',
                 data: data,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: '#F6FDFF',
                 tension: 0.1
             }]
         },
         options: {
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
             scales: {
                 y: {
-                    beginAtZero: true
-                }
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#FFFFFF',
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#FFFFFF',
+                    }
+                },
             }
+
         }
     });
+
+    Chart.defaults.color = '#000';
 }
 
 // Function to change displaying chart

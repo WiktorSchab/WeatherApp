@@ -19,7 +19,7 @@
 
             <div id="chart">
                 <!-- Day of the week shown in temperature chart -->
-                <div id="weekDayInfo"><p>Mon</p></div>
+                <div id="weekDayInfo"><p id="weekDay"></p></div>
                 <div id="chartContent">
 
                     {% for date, info in weather_info.items %}
@@ -38,8 +38,11 @@
 
         <div id="weekDays">
             {% for date, info in weather_daily_info.items %}
-                <div class="dayContainer"><p>{{ info.2|slice:"0:3" }}</p>
-                    <div onclick="changeChart({{ forloop.counter0 }})"><h5>{{ info.0|floatformat:0 }} &deg;C</h5></div>
+                <div class="dayContainer" {% if forloop.first %}id="firstDayContainer"{% endif %}>
+                    <p>{{ info.2|slice:"0:3" }}</p>
+                    <div onclick="changeChart({{ forloop.counter0 }}); changeWeekDayTag('{{ info.2|slice:"0:3" }}')">
+                        <h5>{{ info.0|floatformat:0 }} &degC</h5>
+                    </div>
                 </div>
             {% endfor %}
         </div>

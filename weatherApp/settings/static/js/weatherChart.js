@@ -48,3 +48,20 @@ function changeChart(num){
     chartObj.classList.add('activeChart');
 }
 
+// Script to change week day tag on the chart
+function changeWeekDayTag(weekDay){
+    // Getting object where tag is displayed
+    const tag = document.getElementById('weekDay');
+
+    tag.innerHTML = weekDay;
+}
+
+// Script to load week day tag on chart when page is loaded
+window.onload = function() {
+    var firstDayContainer = document.getElementById('firstDayContainer');
+    if (firstDayContainer) {
+        var firstDayShortName = firstDayContainer.querySelector('p').innerText;
+        changeWeekDayTag(firstDayShortName);
+    }
+};
+

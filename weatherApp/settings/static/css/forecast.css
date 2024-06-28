@@ -1,3 +1,13 @@
+#goBackButton{
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    color: var(--color8);
+}
+#goBackButton{
+    font-size: 50px;
+}
+
 #mainContent{
     display: flex;
     flex-direction: column;

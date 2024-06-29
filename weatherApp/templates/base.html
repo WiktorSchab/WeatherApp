@@ -9,6 +9,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{% static 'css/root.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/message.css' %}">
     {% block additional_styles %}{% endblock %}
 
      <!-- Bootstrap Icons -->
@@ -17,9 +18,17 @@
     <!-- Scripts -->
     <!-- ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/utilities.js' %}"></script>
     {% block additional_scripts %}{% endblock %}
 </head>
 <body>
+    {% for message in messages %}
+       <div class="alert alert-{{ message.tags }}">
+           {{ message }}
+           <i class="bi bi-x-lg" onclick="deleteParent(this)"></i>
+       </div>
+    {% endfor %}
+
     <section>
         {% block content %}
         {% endblock %}

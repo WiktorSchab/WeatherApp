@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from .forms import LocationForm
 from .utilities import get_daily_temps, get_hour_weather
 
@@ -23,20 +24,23 @@ def homePage(request):
 
             # Getting response from api
             response = requests.get(url).json()
+            if response['cod'] == 200:
+                city_info = response['city']
+                weather_info = get_hour_weather(response['list'])
+                weather_daily_info = get_daily_temps(response['list'])
 
-            city_info = response['city']
-            weather_info = get_hour_weather(response['list'])
-            weather_daily_info = get_daily_temps(response['list'])
+                # Converting values of the dict into a JSON file to pass it to the javascript
+                weather_data_for_chart = {}
+                for date, info in weather_info.items():
+                    weather_data_for_chart[date] = json.dumps(info)
 
-            # Converting values of the dict into a JSON file to pass it to the javascript
-            weather_data_for_chart = {}
-            for date, info in weather_info.items():
-                weather_data_for_chart[date] = json.dumps(info)
-
-            context = {'city_info': city_info,
-                       'weather_info': weather_data_for_chart,
-                       'weather_daily_info': weather_daily_info,}
-            return render(request, 'forecast.html', context)
+                context = {'city_info': city_info,
+                           'weather_info': weather_data_for_chart,
+                           'weather_daily_info': weather_daily_info,}
+                return render(request, 'forecast.html', context)
+            else:
+                messages.error(request, f'Error {response["cod"]} | {response["message"]}')
+                return redirect('homePage')
 
     form = LocationForm()
     context = {'form': form}

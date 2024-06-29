@@ -1,0 +1,41 @@
+.alert{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: Calc(500px - 20px);
+    height: Calc(40px - 10px);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: var(--color4);
+    border-radius: var(--radius3);
+}
+
+/* Styles for close button on message */
+.alert i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+
+    cursor: pointer;
+    font-size: var(--size2);
+}
+
+.alert-error{
+    border: 1px solid var(--error);
+}
+.alert-success{
+    border: 1px solid var(--success);
+}
+.alert-info{
+    border: 1px solid var(--info);
+}

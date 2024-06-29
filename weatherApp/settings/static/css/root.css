@@ -23,5 +23,10 @@
     /* Border radius */
     --radius1: 8px;
     --radius2: 16px;
-    --radius3: 32px
+    --radius3: 32px;
+
+    /* Border color of messages */
+    --error: #d61b06;
+    --success: #41e044;
+    --info: #5ae8e3;
 }

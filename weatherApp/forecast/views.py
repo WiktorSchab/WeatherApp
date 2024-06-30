@@ -5,6 +5,7 @@ from .utilities import get_daily_temps, get_hour_weather
 
 import requests
 import json
+import pycountry
 
 
 def homePage(request):
@@ -16,15 +17,29 @@ def homePage(request):
             api_link = r'https://api.openweathermap.org/data/2.5/forecast'
             api_key = open('./api_key', 'r').read().strip()
 
-            # Handling countries will be added in future
-            city = location
+            # Getting city
+            location = location.split(',')
+            city = location[0]
+
+            # Checking if user gave country
+            if len(location) > 1:
+                country = location[1].strip()
+                try:
+                    # Getting iso tag of the country
+                    country_info = pycountry.countries.search_fuzzy(country)[0]
+                    country_iso = country_info.alpha_2
+                    city = ', '.join([city, country_iso])
+                except LookupError:
+                    messages.error(request, "Country Error | Country wasn't found. Please note that the country name must be in English.")
+                    return redirect('homePage')
 
             # Construct the API request URL
             url = f"{api_link}?q={city}&cnt=40&appid={api_key}"
 
             # Getting response from api
             response = requests.get(url).json()
-            if response['cod'] == 200:
+
+            if response['cod'] == '200':
                 city_info = response['city']
                 weather_info = get_hour_weather(response['list'])
                 weather_daily_info = get_daily_temps(response['list'])

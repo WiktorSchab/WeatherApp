@@ -42,7 +42,6 @@ def get_daily_temps(forecast_list):
         forecast = forecast_list[0]
         dt_txt = forecast['dt_txt']
         date = dt_txt.split(' ')[0]
-        time = dt_txt.split(' ')[1]
 
         temp_k = forecast['main']['temp']
         temp_c = temp_k - 273.15 # Convert Kelvin to Celsius
@@ -89,12 +88,31 @@ def get_hour_weather(data):
         # Append the weather data to the list for the corresponding date
         temp_data[date].append(data_to_add)
 
+    # Add data for hour 24:00 (copying data from next day's 00:00)
+    dates = sorted(temp_data.keys())
+    for i in range(len(dates) - 1):
+        today = dates[i]
+        tomorrow = dates[i + 1]
+
+        # Find the weather data at 00:00 for the next day
+        next_day_midnight_data = None
+        for data_point in temp_data[tomorrow]:
+            if data_point['time'] == '00:00:00':
+                next_day_midnight_data = data_point
+                break
+
+        # If found, create a new entry with time 24:00 and add it to the current day
+        if next_day_midnight_data:
+            data_for_24 = next_day_midnight_data.copy()
+            data_for_24['time'] = '24:00:00'
+            temp_data[today].append(data_for_24)
+
     # Optional: Print the data for debugging purposes
     # for i in temp_data:
     #     print(i)
     #     for x in temp_data[i]:
     #         print(x['time'], x['temp'])
     #     print('\n------\n')
-
     return temp_data  # Return the dictionary containing the grouped weather data
+
 

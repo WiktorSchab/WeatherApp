@@ -43,6 +43,9 @@
                 <div class="dayContainer" {% if forloop.first %}id="firstDayContainer"{% endif %}>
                     <p>{{ info.2|slice:"0:3" }}</p>
                     <div onclick="changeChart({{ forloop.counter0 }}); changeWeekDayTag('{{ info.2|slice:"0:3" }}')">
+                        {% with icon_path="images/icons/"|add:info.3 %}
+                            <img class='weatherIcon' src="{% static icon_path %}" alt="Weather Icon">
+                        {% endwith %}
                         <h5>{{ info.0|floatformat:0 }} &degC</h5>
                     </div>
                 </div>

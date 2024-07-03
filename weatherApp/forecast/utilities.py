@@ -7,11 +7,11 @@ tomorrow_date = today_date + timedelta(days=1)
 
 def add_weekday_to_weather_data(weather_data):
     updated_weather_data = {}
-
-    for date_str, (temperature, description) in weather_data.items():
+    for date_str, (temperature, description, icon) in weather_data.items():
         date_obj = datetime.strptime(date_str, '%Y-%m-%d')
         weekday = date_obj.strftime('%A')
-        updated_weather_data[date_str] = (temperature, description, weekday)
+        icon = icon + '.png'
+        updated_weather_data[date_str] = (temperature, description, weekday, icon)
 
     return updated_weather_data
 
@@ -35,7 +35,8 @@ def get_daily_temps(forecast_list):
             temp_c = temp_k - 273.15  # Convert Kelvin to Celsius
 
             description = forecast['weather'][0]['description']
-            daily_temps[date] = (temp_c, description)
+            icon = forecast['weather'][0]['icon']
+            daily_temps[date] = (temp_c, description, icon)
 
     # Checking if today temps is in dict
     if str(today_date) not in daily_temps:
@@ -47,9 +48,10 @@ def get_daily_temps(forecast_list):
         temp_c = temp_k - 273.15 # Convert Kelvin to Celsius
 
         description = forecast['weather'][0]['description']
+        icon = forecast['weather'][0]['icon']
 
         # Adding today's temp on start of the dict
-        today_temp = {date: (temp_c, description)}
+        today_temp = {date: (temp_c, description, icon)}
         daily_temps = {**today_temp, **daily_temps}
 
     daily_temps = add_weekday_to_weather_data(daily_temps)

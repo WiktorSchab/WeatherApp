@@ -24,6 +24,13 @@ function createChart(canvasObj, dataG){
             plugins: {
                 legend: {
                     display: false,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.raw.toFixed(2) + ' °C';
+                        }
+                    }
                 }
             },
             scales: {
@@ -31,6 +38,9 @@ function createChart(canvasObj, dataG){
                     beginAtZero: true,
                     ticks: {
                         color: '#FFFFFF',
+                        callback: function(value, index, values) {
+                            return value + ' °C';
+                        }
                     }
                 },
                 x: {

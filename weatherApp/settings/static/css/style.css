@@ -1,3 +1,7 @@
+*{
+    font-family: Roboto, sans-serif;;
+}
+
 body{
     margin: 0;
     padding 0;
@@ -68,6 +72,9 @@ section{
 #locationForm input::placeholder {
     letter-spacing: 5px;
 }
+
+
+
 
 #locationForm button{
     display: flex;

@@ -76,7 +76,7 @@ def get_hour_weather(data):
         # Extract date and time from the datetime string
         dt_txt = i['dt_txt']
         date = dt_txt.split(' ')[0]
-        time = dt_txt.split(' ')[1]
+        time = dt_txt.split(' ')[1][0:5]
 
         # Create a dictionary with the relevant weather data
         data_to_add = {

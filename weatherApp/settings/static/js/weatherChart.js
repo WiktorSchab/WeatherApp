@@ -3,6 +3,7 @@ function createChart(canvasObj, dataG){
     let datas = JSON.parse(dataG)
     const labels = datas.map(entry => entry.time);
     const data = datas.map(entry => entry.temp);
+    const descriptions = datas.map(entry => entry.weather_description);
 
     // Debug
     //console.log(canvasObj);
@@ -28,7 +29,10 @@ function createChart(canvasObj, dataG){
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return context.raw.toFixed(2) + ' °C';
+                            let index = context.dataIndex;
+                            let temp = context.raw.toFixed(2) + ' °C';
+                            let description = descriptions[index];
+                            return temp + ' - ' + description;
                         }
                     }
                 }

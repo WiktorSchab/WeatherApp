@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import LocationForm
-from .utilities import get_daily_temps, get_hour_weather
+from .utilities import get_daily_temps, get_hour_weather, get_iso_country_tag, get_english_country_name
 
 import requests
 import json
-import pycountry
 
 
 def homePage(request):
@@ -24,12 +23,16 @@ def homePage(request):
             # Checking if user gave country
             if len(location) > 1:
                 country = location[1].strip()
-                try:
-                    # Getting iso tag of the country
-                    country_info = pycountry.countries.search_fuzzy(country)[0]
-                    country_iso = country_info.alpha_2
+
+                # Getting English country name
+                country_eng = get_english_country_name(country)
+
+                # Getting ISO country tag
+                country_iso = get_iso_country_tag(country_eng)
+
+                if country_iso:
                     city = ', '.join([city, country_iso])
-                except LookupError:
+                else:
                     messages.error(request, "Country Error | Country wasn't found. Please note that the country name must be in English.")
                     return redirect('homePage')
 

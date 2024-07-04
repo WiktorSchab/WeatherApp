@@ -1,6 +1,10 @@
 # File with functions for data formatting
 from datetime import datetime, timedelta
 
+import pycountry
+from googletrans import Translator
+
+
 today_date = datetime.now().date()
 tomorrow_date = today_date + timedelta(days=1)
 
@@ -45,7 +49,7 @@ def get_daily_temps(forecast_list):
         date = dt_txt.split(' ')[0]
 
         temp_k = forecast['main']['temp']
-        temp_c = temp_k - 273.15 # Convert Kelvin to Celsius
+        temp_c = temp_k - 273.15  # Convert Kelvin to Celsius
 
         description = forecast['weather'][0]['description']
         icon = forecast['weather'][0]['icon']
@@ -118,3 +122,34 @@ def get_hour_weather(data):
     return temp_data  # Return the dictionary containing the grouped weather data
 
 
+# Function to get English name of the country
+def get_english_country_name(country_name):
+    translator = Translator()
+    try:
+        # Attempt to translate the country name to English
+        result = translator.translate(country_name)
+
+        # Returning value if translation was found and raising error if it was not
+        if result is None:
+            raise ValueError("Translation result is None")
+        return result.text
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+
+# Function to get ISO 3166-1 alpha-2 country code (required by the OpenWeather API)
+def get_iso_country_tag(country_name):
+    try:
+        # Getting iso tag of the country
+        country_info = pycountry.countries.search_fuzzy(country_name)[0]
+        country_iso = country_info.alpha_2
+        return country_iso
+
+    except LookupError:
+        return None
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None

@@ -103,14 +103,15 @@ def get_hour_weather(data):
         # Find the weather data at 00:00 for the next day
         next_day_midnight_data = None
         for data_point in temp_data[tomorrow]:
-            if data_point['time'] == '00:00:00':
+            if data_point['time'] == '00:00':
                 next_day_midnight_data = data_point
                 break
 
         # If found, create a new entry with time 24:00 and add it to the current day
         if next_day_midnight_data:
+
             data_for_24 = next_day_midnight_data.copy()
-            data_for_24['time'] = '24:00:00'
+            data_for_24['time'] = '24:00'
             temp_data[today].append(data_for_24)
 
     # Optional: Print the data for debugging purposes

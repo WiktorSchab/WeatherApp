@@ -82,12 +82,12 @@ Simple weather forecast application built with Django using the OpenWeather API.
 
 
 - Read the weather conditions for a specific hour by moving the cursor over a dot on the chart.
-![weatherDetail](https://github.com/WiktorSchab/WeatherApp/assets/73139165/bd250614-5ecd-4a77-b6dc-2acc0cb5b586)
+![chart2](https://github.com/WiktorSchab/WeatherApp/assets/73139165/8314221b-77ed-4d08-9e76-3d2865fd06a7)
 *<div align="center">Screenshot 2: Chart showing temperature and weather condition on 6:00.</div><br/><br/>*
 
 
 - To check the weather on another day, click on the small boxes below the chart. Each box has a short name for the weekday (Mon - Monday, Wed - Wednesday, etc.).
-![otherDay](https://github.com/WiktorSchab/WeatherApp/assets/73139165/7f0561e3-1a38-451f-9933-9448515ee76c)
+![otherDay](https://github.com/WiktorSchab/WeatherApp/assets/73139165/945acd5b-69a9-47fb-b7e4-849df7e81df6)
 *<div align="center">Screenshot 3: Chart showing data after clicking box with 'Tue' inscription above it.</div><br/><br/>*
 
 ## Notes
